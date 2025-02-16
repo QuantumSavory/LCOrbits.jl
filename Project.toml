@@ -1,0 +1,9 @@
+name = "LCOrbits"
+uuid = "d9401462-0832-4dc7-b246-e799faa72617"
+authors = ["Stefan Krastanov", "QuantumSavory contributors"]
+version = "1.0.0"
+
+[deps]
+
+[compat]
+julia = "1.11"
