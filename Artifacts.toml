@@ -1,0 +1,76 @@
+[lcorbit02]
+git-tree-sha1 = "b3f9e5a9ab1863bc05585a774d65e59a5843380b"
+
+    [[lcorbit02.download]]
+    sha256 = "5e12c4ec31366e3b302077873c280d809b8df7a42ddcac5dd96288f5c2164ddf"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement2.tar.xz"
+
+[lcorbit03]
+git-tree-sha1 = "02d29ba653a1d67307d3220d3d55d440c737250c"
+
+    [[lcorbit03.download]]
+    sha256 = "40e0683c9263c22516b2fe8dd387616ff2542f0d8a543205687095d7b8e9ddca"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement3.tar.xz"
+
+[lcorbit04]
+git-tree-sha1 = "65847480f3d90045d9f72776dd2cf0ce1758d35e"
+
+    [[lcorbit04.download]]
+    sha256 = "2a541082bd8ce5f5d25d40a7f05f042157b51a7b770a5727b9529291f94140bf"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement4.tar.xz"
+
+[lcorbit05]
+git-tree-sha1 = "6a2ac9ed088652311aa9f68f22ecb5162bfd204e"
+
+    [[lcorbit05.download]]
+    sha256 = "210b95739ee420e785380d7b734fc04b22242bf8d70215ca7231f6a30ba032cd"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement5.tar.xz"
+
+[lcorbit06]
+git-tree-sha1 = "eaf1169c1a4b6cb23efab6df64e0a20359d1763c"
+
+    [[lcorbit06.download]]
+    sha256 = "50300655036f3a0b39f656359bd8a966551bc5bae0c40db5aa847f54b7d55e99"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement6.tar.xz"
+
+[lcorbit07]
+git-tree-sha1 = "8d61f503e38327e8627eabf1bc292356acf59759"
+
+    [[lcorbit07.download]]
+    sha256 = "822090bfc0d671b001264a7025f072067be112beb18af76edea70167cbf24d18"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement7.tar.xz"
+
+[lcorbit08]
+git-tree-sha1 = "e80f89059f925d2dee9cc367b0b5e633e8efb17e"
+
+    [[lcorbit08.download]]
+    sha256 = "eb6d98b09cab9378d5f6c023638e4d323fc4757e614c11da24857a3fbd12c744"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement8.tar.xz"
+
+[lcorbit09]
+git-tree-sha1 = "08a86990428ecd82fa05bd628c17f609fcd420f4"
+
+    [[lcorbit09.download]]
+    sha256 = "8a79a6a1e046c4cf8ba8be43522b51a2cd499001b2c6b3cfdafa3d01297c8800"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement9.tar.xz"
+
+[lcorbit10]
+git-tree-sha1 = "ff8f98cb8432503e6e2b101ed603329825abbd65"
+
+    [[lcorbit10.download]]
+    sha256 = "ff6351a64eb9b171b4e47e2d3a838d0fdb7f4c2348e5962910e08b53f37071fa"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement10.tar.xz"
+
+[lcorbit11]
+git-tree-sha1 = "bf5b950860a8f4ebcb4b0d8c72beaacc6dd7c188"
+
+    [[lcorbit11.download]]
+    sha256 = "8abad4a8c51e391a7fd65cf2e1715c22dd2ea0affc94a8ad5c6655781fdbe1bd"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement11.tar.xz"
+
+[lcorbit12]
+git-tree-sha1 = "202a350ec44b4905cc1ce476e1fb43643ea546e2"
+
+    [[lcorbit12.download]]
+    sha256 = "ca8dee0bdaf6f5f682cf36641422400ee2856d0e050f91fe0ae426e3d9709c40"
+    url = "https://github.com/QuantumSavory/LCOrbits.jl/raw/94ac30cc73404494e4434ed265e6002f407e8281/artifacts/entanglement12.tar.xz"
