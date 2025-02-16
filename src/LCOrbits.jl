@@ -2,8 +2,10 @@ module LCOrbits
 
 using Artifacts: @artifact_str
 using CSV: CSV
-using DataFrames: DataFrame, select!, Not
+using DataFrames: DataFrame, select!, Not, innerjoin
 using Graphs: Graph, add_edge!, ne, edges, Edge
+
+export lcorbits_summary
 
 # from larsed https://arxiv.org/abs/1011.5464
 lcf02 = joinpath(artifact"lcorbit02", "entanglement2")
@@ -21,6 +23,14 @@ lcf12 = joinpath(artifact"lcorbit12", "entanglement12")
 lcfs = [lcf02, lcf03, lcf04, lcf05, lcf06, lcf07, lcf08, lcf09, lcf10, lcf11, lcf12]
 
 # from sammorley https://arxiv.org/abs/1910.03969
+lcf04f = joinpath(artifact"lcorbit04full", "4qubitorbitsCi.csv")
+lcf05f = joinpath(artifact"lcorbit05full", "5qubitorbitsCi.csv")
+lcf06f = joinpath(artifact"lcorbit06full", "6qubitorbitsCi.csv")
+lcf07f = joinpath(artifact"lcorbit07full", "7qubitorbitsCi.csv")
+lcf08f = joinpath(artifact"lcorbit08full", "8qubitorbitsCi.csv")
+lcf09f = joinpath(artifact"lcorbit09full", "9qubitorbitsCi.csv")
+
+lcffs = [lcf04f, lcf05f, lcf06f, lcf07f, lcf08f, lcf09f]
 
 function parsetuple(str)
     tuple((parse(Int,i) for i in split(str[2:end-1],','))...)
@@ -30,16 +40,16 @@ function parsevec(str)
     Int[parse(Int,i) for i in split(str[2:end-1],',')]
 end
 
-function parsegraphcol(str,vertices)
+function parsegraphcol(str,vertices;indexoffset=1)
     groups = split(str[2:end-1], ")(")
     ncolors = length(groups)
     graph = Graph(vertices)
     colors_dict = Dict{Edge{Int},Int}()
     for (color, group) in enumerate(groups)
-        edges = split(group,',')
+        edges = strip.(split(group,','))
         for edge in edges
             e1, e2 = minmax(parse.(Int, split(edge,'-'))...)
-            p = Edge(e1+1,e2+1) # switch to Julia indexing
+            p = Edge(e1+indexoffset,e2+indexoffset) # switch to Julia indexing
             add_edge!(graph, p)
             colors_dict[p] = color
             #println(p)
@@ -179,6 +189,64 @@ end
 
 function lcorbits_summary()
     vcat([lcorbits_summary(n) for n in 2:12]...)
+end
+
+
+function get_raw_df_sammorley(n)
+    CSV.read(
+        LCOrbits.lcffs[n-3],
+        DataFrame;
+        header=[:EC,:orbitsize,:_orbit_metagraph,:_orbit_metagraphedgeops,:_orbit]
+    )
+end
+
+function clean_up_df_sammorley(n)
+    df = get_raw_df_sammorley(n)
+    l = size(df, 1)
+
+    orbit = Vector{Vector{Graph{Int}}}(undef, l)
+    orbit_metagraph = Vector{Graph{Int}}(undef, l)
+    orbit_metagraphedgeops = Vector{Dict{Edge{Int},Vector{Int}}}(undef, l)
+
+    for (i,row) in enumerate(eachrow(df))
+        _orbit = Vector{Graph{Int}}(undef, row.orbitsize)
+        for (j,graphstr) in enumerate(split(row._orbit[3:end-2],"), ("))
+            _orbit[j], _ = parsegraphcol("("*graphstr*")", n; indexoffset=0)
+        end
+        orbit[i] = _orbit
+
+        orbit_metagraph[i], _ = parsegraphcol(row._orbit_metagraph, row.orbitsize; indexoffset=0)
+
+        dict = Dict{Edge{Int},Vector{Int}}()
+        # TODO finish metagraphedgeops
+    end
+    df[!,:orbit] = orbit
+    df[!,:orbit_metagraph] = orbit_metagraph
+
+    return select!(df, Not(:_orbit,:_orbit_metagraph,:_orbit_metagraphedgeops))
+end
+
+"""Get the database from `arxiv:1910.03969`
+
+Keys in addition to `lcorbits_summary` are:
+
+- `orbit` - a list of all graphs (up to isomorphism) in the orbit
+- `orbit_metagraph` - the orbit itself shown as a graph
+- `orbit_metagraphedgeops` - a mapping from an edge of the orbit metagraph to the list of local complementations that perform the transition (TODO unfinished)
+"""
+function lcorbits_full end
+
+function lcorbits_full(n)
+    (4≤n≤9) || error("The arxiv:1910.03969 database contains only graph states for a number of qubits 4≤n≤9")
+    df = lcorbits_summary(n)
+    df_full = clean_up_df_sammorley(n)
+    return innerjoin(df,df_full,on=:EC,makeunique=true)
+end
+
+function lcorbits_full()
+    df = vcat([lcorbits_summary(n) for n in 4:9]...)
+    df_full = vcat([clean_up_df_sammorley(n) for n in 4:9]...)
+    return innerjoin(df,df_full,on=:EC,makeunique=true)
 end
 
 end

@@ -52,3 +52,49 @@ julia> graphplot(orbit42_10.minedge_repr; edge_color=orbit42_10.minedge_repr_col
 ```
 
 ![](./docs/src/graphplot.png)
+
+
+## `lcorbits_full`
+
+Use to get the database from `arxiv:1910.03969`
+
+Keys in addition to `lcorbits_summary` are:
+
+- `orbit` - a list of all graphs (up to isomorphism) in the orbit
+- `orbit_metagraph` - the orbit itself shown as a graph
+- `orbit_metagraphedgeops` - a mapping from an edge of the orbit metagraph to the list of local complementations that perform the transition (TODO unfinished)
+
+```julia-repl
+julia> using LCOrbits, GraphMakie, CairoMakie, NetworkLayout
+
+julia> df = LCOrbits.lcorbits_full();
+
+julia> i = findfirst(>(20), df.orbitsize)
+12
+
+julia> firstlargeorbit = df[i,:];
+
+julia> graphplot(firstlargeorbit.orbit_metagraph)
+```
+
+![](./docs/src/metagraph.png)
+
+```julia-repl
+julia> f = Figure()
+
+julia> n = firstlargeorbit.vertices
+6
+
+julia> for (i,g) in enumerate(firstlargeorbit.orbit)
+           x = ((i-1)÷5)+1
+           y = rem(i-1,5)+1
+           a = Axis(f[x,y])
+           graphplot!(a,g;layout=Shell())
+           hidedecorations!(a)
+           hidespines!(a)
+       end
+
+julia> current_figure()
+```
+
+![](./docs/src/orbitgraphs.png)
