@@ -98,3 +98,10 @@ julia> current_figure()
 ```
 
 ![](./docs/src/orbitgraphs.png)
+
+
+## Installation
+
+Install julia using [`juliaup`](https://julialang.org/downloads/)
+
+From the julia terminal press `]` to enter "package mode" and type `add LCOrbits`. If you want the currently unpublished dev version of the library do `add https://github.com/QuantumSavory/LCOrbits.jl`.
