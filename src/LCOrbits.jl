@@ -48,7 +48,8 @@ function parsegraphcol(str,vertices;indexoffset=1)
     for (color, group) in enumerate(groups)
         edges = strip.(split(group,','))
         for edge in edges
-            e1, e2 = minmax(parse.(Int, split(edge,'-'))...)
+            e1, e2 = parse.(Int, split(edge,'-'))
+            e1, e2 = minmax(e1, e2)
             p = Edge(e1+indexoffset,e2+indexoffset) # switch to Julia indexing
             add_edge!(graph, p)
             colors_dict[p] = color
