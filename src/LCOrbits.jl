@@ -5,7 +5,7 @@ using CSV: CSV
 using DataFrames: DataFrame, select!, Not, innerjoin
 using Graphs: Graph, add_edge!, ne, edges, Edge
 
-export lcorbits_summary
+export lcorbits_summary, lcorbits_full
 
 # from larsed https://arxiv.org/abs/1011.5464
 lcf02 = joinpath(artifact"lcorbit02", "entanglement2")
