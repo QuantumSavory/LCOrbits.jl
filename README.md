@@ -1,4 +1,6 @@
-A Julia wrapper for the resources at
+# Orbits of Graph States under Local Complementation
+
+A Julia wrapper for the databases of quantum graph states equivalent under local complementation from
 
 - https://www.ii.uib.no/~larsed/entanglement/ (related to https://arxiv.org/abs/1011.5464)
 - https://zenodo.org/records/3757948 (related to https://arxiv.org/abs/1910.03969)
@@ -7,9 +9,15 @@ A Julia wrapper for the resources at
 All of the wrapped resources are under the original authors's copyright.
 This repository is just for convenient hosting and wrapping in a Julia library.
 
+## Installation
+
+Install julia using [`juliaup`](https://julialang.org/downloads/). Then, from the julia terminal press `]` to enter "package mode" and type `add LCOrbits`. If you want the currently unpublished dev version of the library do `add https://github.com/QuantumSavory/LCOrbits.jl` instead.
+
 ## `lcorbits_summary`
 
-Use to get the database from `arxiv:1011.5464`
+Use to get the database from `arxiv:1011.5464`, containing the equivalency classes of graph states (i.e. orbits), without explicitly listing all the graph states in each orbit.
+
+However, the minimal edge state and minimal chromatic index state for each orbit are listed.
 
 Keys are:
 
@@ -35,6 +43,7 @@ Keys are:
 - `bipartrankidx2` - rank index for bipartite splits with 2 vertices in the smaller partition
 - `cardmult` - the cardinality-multiplicities
 
+### Example: plotting a minimal edge representation state from a given orbit
 
 ```julia-repr
 julia> using LCOrbits, GraphMakie, CairoMakie
@@ -56,7 +65,7 @@ julia> graphplot(orbit42_10.minedge_repr; edge_color=orbit42_10.minedge_repr_col
 
 ## `lcorbits_full`
 
-Use to get the database from `arxiv:1910.03969`
+Use to get the database from `arxiv:1910.03969`, which includes the entirety of each orbit (each graph state in the orbit, not only the minimal states).
 
 Keys in addition to `lcorbits_summary` are:
 
@@ -64,12 +73,14 @@ Keys in addition to `lcorbits_summary` are:
 - `orbit_metagraph` - the orbit itself shown as a graph
 - `orbit_metagraphedgeops` - a mapping from an edge of the orbit metagraph to the list of local complementations that perform the transition (TODO unfinished)
 
+### Example: plotting the metagraph describing the states and possible complementations in a given orbit
+
 ```julia-repl
 julia> using LCOrbits, GraphMakie, CairoMakie, NetworkLayout
 
 julia> df = LCOrbits.lcorbits_full();
 
-julia> i = findfirst(>(20), df.orbitsize)
+julia> i = findfirst(>(20), df.orbitsize) # find the first orbit with more than 20 states
 12
 
 julia> firstlargeorbit = df[i,:];
@@ -78,6 +89,8 @@ julia> graphplot(firstlargeorbit.orbit_metagraph)
 ```
 
 ![](./docs/src/metagraph.png)
+
+### Continuing example: plotting all the states in the given orbit
 
 ```julia-repl
 julia> f = Figure()
@@ -98,10 +111,3 @@ julia> current_figure()
 ```
 
 ![](./docs/src/orbitgraphs.png)
-
-
-## Installation
-
-Install julia using [`juliaup`](https://julialang.org/downloads/)
-
-From the julia terminal press `]` to enter "package mode" and type `add LCOrbits`. If you want the currently unpublished dev version of the library do `add https://github.com/QuantumSavory/LCOrbits.jl`.
