@@ -10,7 +10,7 @@ DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
 
 [compat]
-Artifacts = "1.11.0"
+Artifacts = "1.11.0, 1"
 CSV = "0.10.15"
 DataFrames = "1.7.0"
 Graphs = "1.12.0"
