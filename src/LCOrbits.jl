@@ -117,7 +117,7 @@ function clean_up_df_larsed(n)
             minchromidxrepr[i], minchromidxrepr_colors[i] = mer, merc
             same_min_edgeschromidx_repr[i] = true
         else
-            minchromidxrepr[i], minchromidxrepr_colors[i] = parsegraphcol(row._minchromidx, row.vertices)
+            minchromidxrepr[i], minchromidxrepr_colors[i] = parsegraphcol(row._minchromidxrepr, row.vertices)
             same_min_edgeschromidx_repr[i] = false
         end
 
