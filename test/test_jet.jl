@@ -5,7 +5,8 @@ using Test
 using LCOrbits
 using CSV, DataFrames
 
-rep = report_package("LCOrbits";
+rep = report_package(LCOrbits;
+    target_modules=(LCOrbits,),
     ignored_modules=(
         LastFrameModule(Base),
         AnyFrameModule(CSV),
